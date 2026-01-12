@@ -5,6 +5,8 @@
     padding: 20px; 
     height: 1000px; 
     width: 1500px; 
+    transition: transform 5s ease;
+    transform-origin: center;
 }
 
 .container div {
@@ -24,9 +26,42 @@
   height: 100%;
   transition: .5s left ease;
 }
-.bilde:hover .overlay {
+.bilde {
+  position: relative;
   width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.image {
+  width: 50%;
+  height: 50%;
+  display: block;
+}
+
+/* overlay starts hidden on the right */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 100%;
+  transition: left 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* slide in when hovering the container */
+.bilde:hover .overlay {
   left: 0;
+}
+
+/* optional: image inside overlay */
+.overlay img {
+  width: 50%;
+  height: 50%;
+  object-fit: cover;
 }
 * {
     margin: 0;
@@ -34,24 +69,33 @@
     box-sizing: border-box;
   }
   .bubble {
-    min-height: 10vh;
-    min-width: 10vh;
+    min-height: 5vh;
+    min-width: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 10px solid green;
     border-radius: 50%;
     animation: breathe 12s linear infinite;
+    position: absolute;
+    background-color: aqua;
   }
   
   @keyframes breathe {
     0%,
     100% {
-      height: 10vh;
-      width: 10vh;
+      height: 5vh;
+      width: 5vh;
     }
     33.333% {
-      width: 50vh;
-      height: 50vh;
+      width: 20vh;
+      height: 20vh;
     }
   }
+  .rotate-left {
+  transform: rotateY(-360deg);
+}
+
+.rotate-right {
+  transform: rotateY(360deg);
+}
