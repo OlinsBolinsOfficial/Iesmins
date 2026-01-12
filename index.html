@@ -14,20 +14,35 @@
                   position: relative;
                   width: 100%;
                 }      
-                .bilder:hover .overlay {
+                .bilde:hover .overlay {
                   width: 100%;
                   left: 0;
                   
                 }    
                 </style>    
-                <div class="bilde1">
-                  <div class="overlay">
-                    <div class="text"><img src="vtdt.jpg" alt="Avatar" class="image"></div>
-                  </div><img src="images.png" alt="purple square">
-                </div>
+                <div class="bilde">
+  <img src="images.png" alt="Base image" class="image">
+  <div class="overlay">
+    <img src="vtdt.jpg" alt="Overlay image">
+  </div>
+</div>
         </div>
         <div>2</div>
-        <div>3</div>
+        <div><button id="rotateBtn">Rotate</button>
+        <script>
+  const container = document.querySelector('.container');
+  const button = document.getElementById('rotateBtn');
+
+  let angle = 0;
+  let direction = -1; // -1 = left, 1 = right
+
+  button.addEventListener('click', () => {
+    angle += 360 * direction;
+    container.style.transform = `rotate(${angle}deg)`;
+    direction *= -1;
+  });
+</script>
+</div>
         <div class="">
           <div class="bubble"></div>  
         </div>
@@ -64,3 +79,4 @@
     </div>
 </body>
 </html>
+
