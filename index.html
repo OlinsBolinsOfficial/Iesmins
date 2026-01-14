@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="container">
+
         <div class="bilde">
             <style>
                 .bilde {
@@ -17,66 +18,263 @@
                 .bilde:hover .overlay {
                   width: 100%;
                   left: 0;
-                  
                 }    
-                </style>    
-                <div class="bilde">
-  <img src="images.png" alt="Base image" class="image">
-  <div class="overlay">
-    <img src="vtdt.jpg" alt="Overlay image">
-  </div>
+            </style>    
+
+<div class="bilde">
+  <img src="images.png" alt="Base image">
+  <img src="vtdt.jpg" alt="Overlay image" class="overlay-img">
 </div>
+
         </div>
-        <div>2</div>
-        <div><button id="rotateBtn">Rotate</button>
-        <script>
-  const container = document.querySelector('.container');
-  const button = document.getElementById('rotateBtn');
 
-  let angle = 0;
-  let direction = -1; // -1 = left, 1 = right
+        <div id="confetti-container"></div>
 
-  button.addEventListener('click', () => {
-    angle += 360 * direction;
-    container.style.transform = `rotate(${angle}deg)`;
-    direction *= -1;
-  });
+<style>
+  #confetti-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%; 
+    background: transparent;
+  }
+
+  .confetti {
+    position: absolute;
+    top: -10px;
+    width: 8px;
+    height: 12px;
+    opacity: 0.9;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(310px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  const confettiContainer = document.getElementById("confetti-container");
+  const colors = ["#ff0", "#f00", "#0f0", "#00f", "#ff69b4", "#00ffff"];
+
+  function createConfetti() {
+    const confetti = document.createElement("div");
+    confetti.classList.add("confetti");
+
+    confetti.style.left = Math.random() * 100 + "%";
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+    confetti.style.width = Math.random() * 6 + 6 + "px";
+    confetti.style.height = Math.random() * 10 + 8 + "px";
+    confetti.style.animationDuration = Math.random() * 2 + 2 + "s";
+
+    confettiContainer.appendChild(confetti);
+
+    setTimeout(() => {
+      confetti.remove();
+    }, 4000);
+  }
+
+  setInterval(createConfetti, 150);
 </script>
-</div>
-        <div class="">
-          <div class="bubble"></div>  
+
+
+        <div>
+            <button id="rotateBtn">Rotate</button>
+            <script>
+                const container = document.querySelector('.container');
+                const button = document.getElementById('rotateBtn');
+
+                let angle = 0;
+                let direction = -1;
+
+                button.addEventListener('click', () => {
+                    angle += 360 * direction;
+                    container.style.transform = `rotate(${angle}deg)`;
+                    direction *= -1;
+                });
+            </script>
         </div>
 
-        
+        <div>
+            <div class="bubble"></div>  
+        </div>
+
         <div class="links">
             <style>
-                a:link {
-                  color: blue;
-                }
-                
-                a:visited {
-                  color: red;
-                }
-                
-                a:hover {
-                  color: green;
-                }
+                a:link { color: blue; }
+                a:visited { color: red; }
+                a:hover { color: green; }
             </style>  
+
             <ul style="list-style: none; padding: 0;">
                 <li><a href="https://www.youtube.com/" target="_blank">Youtube</a></li>
                 <li><a href="https://www.e-klase.lv/" target="_blank">E-Klase</a></li>
                 <li><a href="https://mail.google.com/mail/u/0/#inbox" target="_blank">Gmail</a></li>
                 <li><a href="https://www.vtdt.lv/" target="_blank">VTDT</a></li>
-                <li><a href="https://www.1a.lv/?utm_source=google&utm_medium=cpc&utm_id=13230312462&utm_campaign=Search%20|%20CLASSICAL%20|%20Brand&gad_source=1&gad_campaignid=13230312462&gbraid=0AAAAADtaQTKLcVnm-exVMMDNXKKphye33&gclid=EAIaIQobChMI7LXbofGFkgMV1lyRBR0Ujhs8EAAYASAAEgLvBfD_BwE" target="_blank">1A</a></li>
-                <li><a href="https://www.oxfordlearnersdictionaries.com/definition/english/bullshit_1" target="_blank">VTDT</a></li>
+                <li><a href="https://www.1a.lv/" target="_blank">1A</a></li>
             </ul>
         </div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
+
+        <div id="weather">
+            <p id="location">Loading location...</p>
+            <p id="temperature">Loading temperature...</p>
+        </div>
+
+        <div class="register-box">
+          <h3>Register</h3>
+      
+          <input id="firstName" type="text" placeholder="First Name" required>
+          <input id="lastName" type="text" placeholder="Last Name" required>
+          <input id="phone" 
+       type="tel" 
+       placeholder="Phone Number"
+       maxlength="8"
+       pattern="[0-9]{8}">
+
+       <input id="personalCode"
+       type="tel"
+       placeholder="personalCode"
+       maxlength="12"
+       pattern="[0-9]{12}"
+  >
+
+      
+          <button id="registerBtn">Register</button>
+      </div>
+      <div id="userDisplay" class="user-box">
+
+    
+        <p id="userName">No user registered</p>
+    
+        <div id="editSection" style="display: none;">
+    <input id="editFirstName" type="text" placeholder="First Name">
+    <input id="editLastName" type="text" placeholder="Last Name">
+    <input id="editPhone" type="tel" placeholder="Phone Number" maxlength="8" pattern="[0-9]{8}">
+    <input id="editPersonalCode" type="tel" placeholder="Personal Code" maxlength="12" pattern="[0-9]{12}">
+    <button id="saveBtn">Save</button>
+</div>
+    
+        <button id="editBtn">Edit</button>
+    </div>
+
+<div id="deleteUserBox" class="user-box">
+  <h3>Delete User</h3>
+  <button id="deleteBtn">Delete</button>
+</div>
+
 
     </div>
+
+    <script>
+        const latitude = 57.31;
+        const longitude = 25.27;
+
+        fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("location").textContent = "Location: Cēsis, Latvia";
+                document.getElementById("temperature").textContent =
+                    "Temperature: " + data.current_weather.temperature + "°C";
+            })
+            .catch(error => {
+                document.getElementById("temperature").textContent = "Weather unavailable";
+                console.error(error);
+            });
+    </script>
+<script>
+  const userNameDisplay = document.getElementById("userName");
+  const editBtn = document.getElementById("editBtn");
+  const saveBtn = document.getElementById("saveBtn");
+  const editSection = document.getElementById("editSection");
+
+  const editFirstName = document.getElementById("editFirstName");
+  const editLastName = document.getElementById("editLastName");
+
+  function loadUser() {
+  const firstName = localStorage.getItem("firstName");
+  const lastName = localStorage.getItem("lastName");
+
+  if (firstName && lastName) {
+    userNameDisplay.textContent = firstName + " " + lastName;
+    editFirstName.value = firstName;
+    editLastName.value = lastName;
+  } else {
+    userNameDisplay.textContent = "No user registered";
+  }
+}
+
+
+  loadUser();
+
+  editBtn.addEventListener("click", () => {
+      editSection.style.display = "block";
+      editBtn.style.display = "none";
+  });
+
+  saveBtn.addEventListener("click", () => {
+      const firstName = editFirstName.value.trim();
+      const lastName = editLastName.value.trim();
+
+      if (firstName && lastName) {
+          localStorage.setItem("firstName", firstName);
+          localStorage.setItem("lastName", lastName);
+
+          userNameDisplay.textContent = firstName + " " + lastName;
+
+          editSection.style.display = "none";
+          editBtn.style.display = "block";
+      } else {
+          alert("Name fields cannot be empty");
+      }
+  });
+</script>
+<script>
+  const registerBtn = document.getElementById("registerBtn");
+  
+  registerBtn.addEventListener("click", () => {
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const phone = document.querySelectorAll('input[type="tel"]')[0].value.trim();
+    const personalCode = document.querySelectorAll('input[type="tel"]')[1].value.trim();
+  
+    if (!firstName || !lastName || !phone || !personalCode) {
+      alert("Please fill in all fields");
+      return;
+    }
+  
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("lastName", lastName);
+    localStorage.setItem("phone", phone);
+    localStorage.setItem("personalCode", personalCode);
+  
+    loadUser();
+    alert("User registered!");
+  });
+  </script>
+  <script>
+    const deleteBtn = document.getElementById("deleteBtn");
+    
+    deleteBtn.addEventListener("click", () => {
+      if (!localStorage.getItem("firstName")) {
+        alert("No user to delete");
+        return;
+      }
+    
+      if (confirm("Are you sure you want to delete this user?")) {
+        localStorage.clear();
+    
+        userNameDisplay.textContent = "No user registered";
+        editSection.style.display = "none";
+        editBtn.style.display = "block";
+    
+        alert("User deleted");
+      }
+    });
+    </script>
+    
 </body>
 </html>
-
